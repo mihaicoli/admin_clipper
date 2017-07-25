@@ -1,0 +1,24 @@
+Admin-Clipper
+=============
+admin-clipper removes all boundary parts that are in or close to a water geometry (or any other clipping geometry).
+The clipped boundaries are extended back to the coastline.
+During the process, polygon boundaries are converted linestring boundaries.
+
+Dependencies
+============
+
+    pip install fiona pyproj shapely
+
+
+Example
+=======
+
+    python admin_clipper.py \
+        --clip-file=water.shp \
+        --src-file=admin.geojson \
+        --result-file=clipped.geojson \
+        --clip-srs='EPSG:3857' \
+        --src-srs='EPSG:25832' \
+        --clip-buffer=100 \
+        --min-segment-length=2000
+
