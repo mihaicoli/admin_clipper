@@ -22,3 +22,10 @@ Example
         --clip-buffer=100 \
         --min-segment-length=2000
 
+Status
+======
+
+The code is provided "AS IS". Do not expect any updates or new features.
+Issues are disabled and we don't provide support by any other means.
+
+However, you are free to use and modify the tool under the terms of the Apache License 2.0 (see LICENSE).
