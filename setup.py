@@ -4,7 +4,7 @@ import pkg_resources
 
 setup(
     name='admin_clipper',
-    version='0.1.1',
+    version='0.1.2',
     description='Clip administrative boundaries at coastlines.',
     long_description='',
     author='Omniscale',

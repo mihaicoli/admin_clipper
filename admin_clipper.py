@@ -1,4 +1,3 @@
-
 # coding: utf-8
 import sys
 import json
@@ -26,16 +25,22 @@ def transform_bbox(transf, bbox):
     return min(xs), min(ys), max(xs), max(ys)
 
 def as_multipolygon(p):
+    if not p:
+        return []
     if p.type == 'MultiPolygon':
         return p
     return MultiPolygon([p])
 
 def as_multilinestring(l):
+    if not l:
+        return []
     if l.type == 'MultiLineString':
         return l
     return MultiLineString([l])
 
 def as_multipoint(l):
+    if not l:
+        return []
     if l.type == 'MultiPoint':
         return l
     return MultiPoint([l])
@@ -137,9 +142,8 @@ def main():
 
                 clip_features = clipsrc.items(bbox=bbox_clip)
                 clip_geom = as_multipolygon(cascaded_union([asShape(f['geometry']) for i, f in clip_features]))
-                clip_geom = transform(proj_clip_to_src, clip_geom)
 
-                if clip_geom.is_empty:
+                if not clip_geom or clip_geom.is_empty:
                     result_features.append({
                         'type': 'Feature',
                         'properties': src_feature['properties'],
@@ -147,6 +151,7 @@ def main():
                     })
                     continue
 
+                clip_geom = transform(proj_clip_to_src, clip_geom)
                 # Buffer the clipping geometry
                 clip_geom_buffered = clip_geom.buffer(clip_buffer)
 
